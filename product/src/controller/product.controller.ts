@@ -16,6 +16,7 @@ export const ProductApi = (app: Express, channel: amqplib.Channel,usecase:Produc
     const { name, desc, type, unit, price, available, suplier, banner }:IProduct = req.body;
     
     // validation
+
     const { data } = await usecase.CreateProduct({
       name,
       desc,
@@ -156,10 +157,16 @@ export const ProductApi = (app: Express, channel: amqplib.Channel,usecase:Produc
   app.get("/", async (req, res, next) => {
     //check validation
     try {
+
       const { data } = await usecase.GetProducts();
       return res.status(200).json(data);
+
     } catch (error) {
+
       return res.status(404).json({ error });
+
     }
+
   });
+  
 };

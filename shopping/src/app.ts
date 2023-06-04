@@ -8,9 +8,10 @@ import { Shoppingimplement } from './framework';
 import { Channel } from 'amqplib';
 
 
-export const ShoppingApp = async (app:Express,channel:Channel,usecase:ShoppingUseCase) => {
+export const ExpressApp = async (app:Express,channel:Channel,usecase:ShoppingUseCase) => {
 
     app.use(express.json());
+    
     app.use(cors());
 
 
