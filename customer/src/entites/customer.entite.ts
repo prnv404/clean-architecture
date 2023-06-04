@@ -1,10 +1,9 @@
-import { timeStamp } from "console"
 
 
 export interface ICustomer {
     email: string,
     password: string,
-    salt?: string,
+    salt: string,
     phone: string,
     address?: any[]
     cart?: any[]
@@ -15,7 +14,7 @@ export interface ICustomer {
 export class CustomerEntite implements ICustomer {
     email: string
     password: string
-    salt?: string
+    salt: string
     phone: string
     address?: any[]
     cart?: any[]

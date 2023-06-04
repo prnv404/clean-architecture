@@ -1,5 +1,6 @@
 import { ICustomer,  IWishlist, ICartItem } from "../../types"
 import { CustomerEntite } from "../../entites/customer.entite"
+import { CustomerDoc } from "../../framework/mongodb/model"
 
 
 export abstract class CustomerRepository {

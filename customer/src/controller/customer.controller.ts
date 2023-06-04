@@ -26,9 +26,9 @@ export const CustomerApi = (app:Express, channel:amqplib.Channel,usecase:Custome
 
     app.post('/login',  async (req:Request,res:Response,next:NextFunction) => {
         
-        const { email, password ,phone} = req.body;
+        const { email, password } = req.body;
 
-        const { data } = await usecase.SignIn({ email, password,phone});
+        const data = await usecase.SignIn({ email, password});
 
         res.json(data);
 

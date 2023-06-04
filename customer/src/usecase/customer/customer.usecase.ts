@@ -1,6 +1,6 @@
 
 import {ValidatePassword ,GenerateSignature,GeneratePassword,GenerateSalt,FormateData} from '@prnv404/ecom-common'
-import {  IAddress, IWishlist, ICartItem,ISignIn  } from '../../types'
+import {  IAddress, IWishlist, ICartItem,ISignIn, ISignUp  } from '../../types'
 import { AddressEntite } from '../../entites/address.entite';
 import { CustomerEntite } from '../../entites/customer.entite';
 import { CustomerRepository } from "../repository/customer.repository";
@@ -16,23 +16,31 @@ export class CustomerUseCase {
 
     async SignIn(userInputs:ISignIn){
 
-        const { email, password } = userInputs;
+        try {
+
+            const { email, password } = userInputs;
         
-        const existingCustomer = await this.repository.FindCustomer(email);
-
-        if(existingCustomer){
-            
-            const validPassword = await ValidatePassword(password, existingCustomer.password, existingCustomer.salt);
-            if(validPassword){
-                const token = await GenerateSignature({ email: existingCustomer.email, _id: existingCustomer._id},process.env.APP_SECRET!);
-                return FormateData({id: existingCustomer._id, token });
+            const existingCustomer = await this.repository.FindCustomer(email);
+    
+    
+            if(existingCustomer){
+                
+                const validPassword = await ValidatePassword(password, existingCustomer.password, existingCustomer.salt);
+                if(validPassword){
+                    const token = await GenerateSignature({ email: existingCustomer.email, _id: existingCustomer._id},process.env.APP_SECRET!);
+                    return FormateData({id: existingCustomer._id, token });
+                }
             }
+    
+            return FormateData(null);
+            
+        } catch (error) {
+            console.log(error)
         }
-
-        return FormateData(null);
+      
     }
 
-    async SignUp(userInputs:ISignIn){
+    async SignUp(userInputs:ISignUp){
         
         let { email, password,phone } = userInputs;
         
@@ -41,10 +49,10 @@ export class CustomerUseCase {
         
         password = await GeneratePassword(password, salt);
 
-        let customer = new CustomerEntite({email,password,phone})
+        let customer = new CustomerEntite({ email, password, phone, salt })
 
         const existingCustomer = await this.repository.CreateCustomer(customer);
-        
+
         const token = await GenerateSignature({ email: existingCustomer.email, _id: existingCustomer._id},process.env.APP_SECRET!);
         
         return FormateData({id: existingCustomer._id, token });

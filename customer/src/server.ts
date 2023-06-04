@@ -1,3 +1,5 @@
+import 'express-async-errors'
+
 import 'reflect-metadata'
 import express from 'express';
 import { EXCHANGE_NAME, MONGO_URI, MSG_QUEUE_URL, PORT, configureIOCContainer } from './config';

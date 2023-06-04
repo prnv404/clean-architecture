@@ -4,8 +4,10 @@ import { Customer,Address } from "../model";
 import { ICustomer, IAddress, IWishlist, ICartItem  } from '../../../types'
 import { CustomerRepository } from "../../../usecase/repository/customer.repository";
 import { Service } from "typedi";
+import { servicesVersion } from "typescript";
 
 //Dealing with data base operations
+@Service()
 export class CustomerRepositoryImpl implements CustomerRepository{
 
     async CreateCustomer(userInput: ICustomer) {

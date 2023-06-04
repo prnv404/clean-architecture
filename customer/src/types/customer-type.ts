@@ -32,12 +32,18 @@ export interface ICartItem {
     price: string
     banner: string
     
+
+}
+
+export interface ISignUp {
+    email: string
+    password: string
+    phone:string
 }
 
 export interface ISignIn {
     email: string
     password: string
-    phone:string
 }
 
 export interface Payload {
