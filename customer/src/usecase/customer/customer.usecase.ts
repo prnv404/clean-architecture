@@ -21,7 +21,8 @@ export class CustomerUseCase {
             const { email, password } = userInputs;
         
             const existingCustomer = await this.repository.FindCustomer(email);
-    
+            
+            console.log(existingCustomer)
     
             if(existingCustomer){
                 
@@ -52,6 +53,8 @@ export class CustomerUseCase {
         let customer = new CustomerEntite({ email, password, phone, salt })
 
         const existingCustomer = await this.repository.CreateCustomer(customer);
+
+        console.log(existingCustomer)
 
         const token = await GenerateSignature({ email: existingCustomer.email, _id: existingCustomer._id},process.env.APP_SECRET!);
         
