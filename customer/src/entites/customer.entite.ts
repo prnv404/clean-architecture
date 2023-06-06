@@ -5,10 +5,7 @@ export interface ICustomer {
     password: string,
     salt: string,
     phone: string,
-    address?: any[]
-    cart?: any[]
-    wishlist?: any[]
-    orders?:any[]
+
 }
 
 export class CustomerEntite implements ICustomer {
@@ -16,10 +13,6 @@ export class CustomerEntite implements ICustomer {
     password: string
     salt: string
     phone: string
-    address?: any[]
-    cart?: any[]
-    wishlist?: any[]
-    orders?: any[]
 
     constructor({ email, password, phone, salt }: ICustomer) {
         this.email = email

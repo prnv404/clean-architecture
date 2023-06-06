@@ -5,9 +5,8 @@ import express from 'express';
 import { EXCHANGE_NAME, MONGO_URI, MSG_QUEUE_URL, PORT, configureIOCContainer } from './config';
 import { ConnectDb } from './framework/mongodb'
 import { CreateChannel } from "@prnv404/ecom-common"
-import { ExpressApp } from './app';
+import { ExpressApp } from './framework'; 
 import { CustomerUseCase } from './usecase/customer/customer.usecase';
-import { Customer } from './framework/mongodb/model';
 
 
 const StartServer = async () => {

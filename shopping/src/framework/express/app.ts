@@ -1,10 +1,8 @@
 import express, {Express} from 'express';
 import cors from 'cors';
-import { ShoppingApi } from './controller/shopping.controller';
-import { CreateChannel, errorHandler } from '@prnv404/ecom-common'
-import { EXCHANGE_NAME, MSG_QUEUE_URL } from './config';
-import { ShoppingUseCase } from './usecase/shopping/shopping.usecase';
-import { Shoppingimplement } from './framework';
+import { ShoppingApi } from '../../controller/shopping.controller';
+import {  errorHandler } from '@prnv404/ecom-common'
+import { ShoppingUseCase } from '../../usecase/shopping/shopping.usecase';
 import { Channel } from 'amqplib';
 
 

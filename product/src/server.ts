@@ -3,7 +3,7 @@ import 'express-async-errors'
 import express from 'express';
 import { EXCHANGE_NAME, MONGO_URI, MSG_QUEUE_URL, PORT,configureIOCContainer } from './config';
 import { ConnectDb } from './frameworks';
-import { ExpressApp } from './app';
+import { ExpressApp } from './frameworks/express/app';
 import { CreateChannel } from '@prnv404/ecom-common';
 import { ProductUseCase } from './usecase/product/product.usecase';
 

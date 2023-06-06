@@ -3,7 +3,7 @@ import 'reflect-metadata'
 import express from 'express';
 import { EXCHANGE_NAME, MONGO_URI, MSG_QUEUE_URL, PORT, configureIOCContainer } from './config';
 import { ConnectDb } from './framework/index'
-import { ExpressApp } from './app';
+import { ExpressApp } from './framework/express/app';
 import { CreateChannel } from '@prnv404/ecom-common';
 import { ShoppingUseCase } from './usecase/shopping/shopping.usecase';
 

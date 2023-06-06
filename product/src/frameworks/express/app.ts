@@ -1,10 +1,9 @@
 import express, { Express }  from "express";
 import cors from "cors";
-import { ProductApi } from "./controller/product.controller";
-import { CreateChannel,errorHandler } from "@prnv404/ecom-common"
-import { EXCHANGE_NAME, MSG_QUEUE_URL } from "./config";
-import { ProductImplement } from "./frameworks";
-import { ProductUseCase } from "./usecase/product/product.usecase";
+import { ProductApi } from "../../controller/product.controller";
+import { errorHandler } from "@prnv404/ecom-common"
+
+import { ProductUseCase } from "../../usecase/product/product.usecase";
 import {Channel} from 'amqplib'
 
 
