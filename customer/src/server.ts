@@ -12,6 +12,7 @@ import { CustomerUseCase } from './usecase/customer/customer.usecase';
 const StartServer = async () => {
     
     const app = express();
+    
 
     const channel =await CreateChannel(MSG_QUEUE_URL,EXCHANGE_NAME)
     
