@@ -9,5 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
+    - name: Running the Scripts
       run: cd customer && npm install && npm run build
