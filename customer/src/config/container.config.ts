@@ -4,7 +4,7 @@ import { Container } from 'typedi';
 import { CustomerRepository } from '../usecase/repository/customer.repository'; 
 import { CustomerRepositoryImpl } from '../framework'; 
 
-export function configureIOCContainer() {
+export function IOCContainer() {
 
     const container = Container;
     
