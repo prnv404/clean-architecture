@@ -1,20 +1,40 @@
-
+import 'reflect-metadata'
 import express, { Express } from 'express';
 import amqplib from 'amqplib'
 import cors from 'cors';
 import { CustomerApi } from '../../controller/customer.controller'; 
-import {errorHandler} from '@prnv404/ecom-common'
+import {CreateChannel, errorHandler} from '@prnv404/ecom-common'
 import { CustomerUseCase } from '../../usecase/customer/customer.usecase';
+import { MSG_QUEUE_URL, EXCHANGE_NAME, configureIOCContainer } from '../../config';
+
+ const app = express()
 
 
-export const ExpressApp = async (app: Express,channel:amqplib.Channel,service:CustomerUseCase) => {
-    
+export async function expressApp() {
+
     app.use(express.json());
     
     app.use(cors());
- 
-    CustomerApi(app, channel,service);
     
-    app.use(errorHandler)    
+
+    const container = configureIOCContainer()
+    
+
+    const usecase = container.get<CustomerUseCase>(CustomerUseCase)
+    
+ 
+   await CustomerApi(app, usecase);
+    
+    app.use(errorHandler)   
+    
     
 }
+    
+
+     
+ expressApp().then().catch()
+
+    
+
+
+export {app}

@@ -8,7 +8,7 @@ import { ProductUseCase } from '../usecase/product/product.usecase';
 
 
 
-export const ProductApi = (app: Express, channel: amqplib.Channel,usecase:ProductUseCase) => {
+export const ProductApi = (app: Express,usecase:ProductUseCase) => {
   
 
   app.post("/product/create", async (req, res, next) => {
@@ -84,7 +84,7 @@ export const ProductApi = (app: Express, channel: amqplib.Channel,usecase:Produc
     const { data } = await usecase.GetProductPayload( _id, { productId: req.body._id }, "ADD_TO_WISHLIST");
 
     // PublishCustomerEvent(data);
-    PublishMessage(channel,EXCHANGE_NAME, CUSTOMER_SERVICE, JSON.stringify(data));
+    // PublishMessage(channel,EXCHANGE_NAME, CUSTOMER_SERVICE, JSON.stringify(data));
 
     res.status(200).json(data.data.product);
   });
@@ -102,7 +102,7 @@ export const ProductApi = (app: Express, channel: amqplib.Channel,usecase:Produc
     );
 
     // PublishCustomerEvent(data);
-    PublishMessage(channel,EXCHANGE_NAME, CUSTOMER_SERVICE, JSON.stringify(data));
+    // PublishMessage(channel,EXCHANGE_NAME, CUSTOMER_SERVICE, JSON.stringify(data));
 
     res.status(200).json(data.data.product);
     
@@ -121,8 +121,8 @@ export const ProductApi = (app: Express, channel: amqplib.Channel,usecase:Produc
     // PublishCustomerEvent(data);
     // PublishShoppingEvent(data);
 
-    PublishMessage(channel,EXCHANGE_NAME, CUSTOMER_SERVICE, JSON.stringify(data));
-    PublishMessage(channel,EXCHANGE_NAME, SHOPPING_SERVICE, JSON.stringify(data));
+    // PublishMessage(channel,EXCHANGE_NAME, CUSTOMER_SERVICE, JSON.stringify(data));
+    // PublishMessage(channel,EXCHANGE_NAME, SHOPPING_SERVICE, JSON.stringify(data));
 
     const response = { product: data.data.product, unit: data.data.qty };
 
@@ -142,8 +142,8 @@ export const ProductApi = (app: Express, channel: amqplib.Channel,usecase:Produc
       "REMOVE_FROM_CART"
     );
 
-    PublishMessage(channel,EXCHANGE_NAME, CUSTOMER_SERVICE, JSON.stringify(data));
-    PublishMessage(channel,EXCHANGE_NAME, SHOPPING_SERVICE, JSON.stringify(data));
+    // PublishMessage(channel,EXCHANGE_NAME, CUSTOMER_SERVICE, JSON.stringify(data));
+    // PublishMessage(channel,EXCHANGE_NAME, SHOPPING_SERVICE, JSON.stringify(data));
 
     const response = { product: data.data.product, unit: data.data.qty };
 

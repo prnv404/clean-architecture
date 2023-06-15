@@ -3,15 +3,17 @@ import * as amqplib from 'amqplib'
 
 import { CustomerUseCase } from '../usecase/customer/customer.usecase';
 // import { SubscribeMessage } from '../../utils';
-import { SubscribeMessage ,UserAuth} from '@prnv404/ecom-common';
-import { CUSTOMER_SERVICE, EXCHANGE_NAME } from '../config';
+import { CreateChannel, SubscribeMessage ,UserAuth} from '@prnv404/ecom-common';
+import { CUSTOMER_SERVICE, EXCHANGE_NAME, MSG_QUEUE_URL } from '../config';
 
 
-export const CustomerApi = (app:Express, channel:amqplib.Channel,usecase:CustomerUseCase) => {
+export const CustomerApi = async (app:Express, usecase:CustomerUseCase) => {
     
     
     // To listen
-    SubscribeMessage(channel,EXCHANGE_NAME,CUSTOMER_SERVICE,usecase);
+    // const channel = await CreateChannel(MSG_QUEUE_URL, EXCHANGE_NAME)
+    
+//    await SubscribeMessage(channel,EXCHANGE_NAME,CUSTOMER_SERVICE,usecase);
 
 
     app.post('/signup', async (req: Request, res: Response, next: NextFunction) => {

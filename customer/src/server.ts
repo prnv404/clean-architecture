@@ -1,28 +1,14 @@
 import 'express-async-errors'
-
 import 'reflect-metadata'
-import express from 'express';
-import { EXCHANGE_NAME, MONGO_URI, MSG_QUEUE_URL, PORT, configureIOCContainer } from './config';
+import { MONGO_URI, PORT } from './config';
 import { ConnectDb } from './framework/mongodb'
-import { CreateChannel } from "@prnv404/ecom-common"
-import { ExpressApp } from './framework'; 
-import { CustomerUseCase } from './usecase/customer/customer.usecase';
 
+import { expressApp, app } from './framework/express/app'
 
 const StartServer = async () => {
     
-    const app = express();
-
-    const channel =await CreateChannel(MSG_QUEUE_URL,EXCHANGE_NAME)
-    
     await ConnectDb(MONGO_URI);
-
-    const container = configureIOCContainer()
-
-    const usecase  = container.get<CustomerUseCase>(CustomerUseCase)
-
-    await ExpressApp(app,channel,usecase);
-
+    
     app.listen(PORT, () => {
           console.log(`listening to port ${PORT}`);
     })
@@ -31,10 +17,11 @@ const StartServer = async () => {
         process.exit();
     })
     .on('close', () => {
-        channel.close();
     })
     
 
 }
 
 StartServer();
+
+

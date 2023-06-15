@@ -6,21 +6,13 @@ import { ConnectDb } from './frameworks';
 import { ExpressApp } from './frameworks/express/app';
 import { CreateChannel } from '@prnv404/ecom-common';
 import { ProductUseCase } from './usecase/product/product.usecase';
-
+import app from './frameworks/express/app';
 
 const StartServer = async() => {
 
-    const app = express();
     
     await ConnectDb(MONGO_URI);
-
-    const channel = await CreateChannel(MSG_QUEUE_URL, EXCHANGE_NAME);
-    
-    const container = configureIOCContainer()
-
-    const usecase = container.get<ProductUseCase>(ProductUseCase)
-
-    await ExpressApp(app,channel,usecase);
+    await ExpressApp();
 
     app.listen(PORT, () => {
         console.log(`listening to port ${PORT}`);
