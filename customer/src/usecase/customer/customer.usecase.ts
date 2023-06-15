@@ -1,5 +1,5 @@
 
-import {ValidatePassword ,GenerateSignature,GeneratePassword,GenerateSalt,FormateData} from '@prnv404/ecom-common'
+import {ValidatePassword ,GenerateSignature,GeneratePassword,GenerateSalt,FormateData, BadRequestError} from '@prnv404/ecom-common'
 import {  IAddress, IWishlist, ICartItem,ISignIn, ISignUp  } from '../../types'
 import { AddressEntite } from '../../entites/address.entite';
 import { CustomerEntite } from '../../entites/customer.entite';
@@ -22,18 +22,22 @@ export class CustomerUseCase {
         
             const existingCustomer = await this.repository.FindCustomer(email);
             
-            console.log(existingCustomer)
     
-            if(existingCustomer){
-                
-                const validPassword = await ValidatePassword(password, existingCustomer.password, existingCustomer.salt);
-                if(validPassword){
-                    const token = await GenerateSignature({ email: existingCustomer.email, _id: existingCustomer._id},process.env.APP_SECRET!);
-                    return FormateData({id: existingCustomer._id, token });
-                }
+            if(!existingCustomer){
+                throw new BadRequestError("User not found")                
             }
-    
-            return FormateData(null);
+
+            const validPassword = await ValidatePassword(password, existingCustomer.password, existingCustomer.salt);
+
+            if (validPassword) {
+                    
+                const token = await GenerateSignature({ email: existingCustomer.email, _id: existingCustomer._id }, process.env.APP_SECRET!);
+                
+                return FormateData({ id: existingCustomer._id, token });
+                
+                }
+            
+            // return FormateData(null);
             
         } catch (error) {
             console.log(error)
