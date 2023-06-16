@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 
 let mongo: any;
 beforeAll(async () => {
-  process.env.JWT_KEY = "asdfasdf";
-  // process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  process.env.SECRET = "asdfasdf";
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   // process.env.MONGO_URI = 'mongodb://localhost:27017/customer'
 
 
@@ -19,12 +19,12 @@ beforeAll(async () => {
   }
 });
 
-// beforeEach(async () => {
-//   const collections = await mongoose.connection.db.collections();
-//   for (let collection of collections) {
-//     await collection.deleteMany({});
-//   }
-// });
+beforeEach(async () => {
+  const collections = await mongoose.connection.db.collections();
+  for (let collection of collections) {
+    await collection.deleteMany({});
+  }
+});
 
 afterAll(async () => {
     const collections = await mongoose.connection.db.collections();
