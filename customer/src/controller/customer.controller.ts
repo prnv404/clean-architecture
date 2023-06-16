@@ -1,10 +1,9 @@
 import express, { Express, NextFunction, Request, Response } from 'express'
-import * as amqplib from 'amqplib'
+
 
 import { CustomerUseCase } from '../usecase/customer/customer.usecase';
 // import { SubscribeMessage } from '../../utils';
-import { SubscribeMessage ,UserAuth} from '@prnv404/ecom-common';
-import { CUSTOMER_SERVICE, EXCHANGE_NAME } from '../config';
+import { UserAuth} from '@prnv404/ecom-common';
 
 
 export const CustomerApi = (app:Express,usecase:CustomerUseCase) => {
