@@ -58,7 +58,6 @@ export class CustomerUseCase {
 
         const existingCustomer = await this.repository.CreateCustomer(customer);
 
-        console.log(existingCustomer)
 
         const token = await GenerateSignature({ email: existingCustomer.email, _id: existingCustomer._id},process.env.APP_SECRET!);
         
@@ -66,7 +65,7 @@ export class CustomerUseCase {
 
     }
 
-    async AddNewAddress(_id:string,userInputs:IAddress){
+    async AddNewAddress(_id:string,userInputs:any){
         
         const { street, postalCode, city,country} = userInputs;
 
@@ -74,7 +73,7 @@ export class CustomerUseCase {
         address._id = _id
         const addressResult = await this.repository.CreateAddress(address)
 
-        return FormateData(addressResult);
+        return addressResult
     }
 
     async GetProfile(id:string){

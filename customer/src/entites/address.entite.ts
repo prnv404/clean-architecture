@@ -11,7 +11,6 @@ export class AddressEntite implements IAddress {
     postalCode:string
     city:string
     country: string
-    
     constructor({street,postalCode,city,country}:IAddress) {
         this.street = street
         this.postalCode = postalCode

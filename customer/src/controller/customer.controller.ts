@@ -7,12 +7,8 @@ import { SubscribeMessage ,UserAuth} from '@prnv404/ecom-common';
 import { CUSTOMER_SERVICE, EXCHANGE_NAME } from '../config';
 
 
-export const CustomerApi = (app:Express, channel:amqplib.Channel,usecase:CustomerUseCase) => {
+export const CustomerApi = (app:Express,usecase:CustomerUseCase) => {
     
-    
-    // To listen
-    SubscribeMessage(channel,EXCHANGE_NAME,CUSTOMER_SERVICE,usecase);
-
 
     app.post('/signup', async (req: Request, res: Response, next: NextFunction) => {
         
