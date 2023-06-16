@@ -10,4 +10,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Running the Test Cases
-      run: cd customer && npm install && npm run test
+      run: cd customer && npm install && npm run test:ci
