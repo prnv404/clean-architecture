@@ -16,7 +16,8 @@ const StartServer = async () => {
     
     await ConnectDb(MONGO_URI);
 
-    const {app,usecase} = await ExpressApp()
+    const { app, usecase } = await ExpressApp()
+    
     
     await SubscribeMessage(channel, EXCHANGE_NAME, CUSTOMER_SERVICE, usecase);
     
