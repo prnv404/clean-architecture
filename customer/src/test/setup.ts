@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 let mongo: any;
 beforeAll(async () => {
   process.env.APP_SECRET = "asdfasdf";
-  // process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   // process.env.MONGO_URI = 'mongodb://localhost:27017/customer'
 
 
