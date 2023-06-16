@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import 'express-async-errors'
 
 import 'reflect-metadata'
@@ -7,20 +8,18 @@ import { ConnectDb } from './framework/mongodb'
 import { CreateChannel, SubscribeMessage } from "@prnv404/ecom-common"
 import { ExpressApp } from './framework'; 
 import { CustomerUseCase } from './usecase/customer/customer.usecase';
-import usecase from './framework/express/app';
 
 
 const StartServer = async () => {
     
 
-    // const channel = await CreateChannel(MSG_QUEUE_URL, EXCHANGE_NAME)
+    const channel = await CreateChannel(MSG_QUEUE_URL, EXCHANGE_NAME)
     
     await ConnectDb(MONGO_URI);
+    
+    const { app ,usecase} = await ExpressApp()
 
-    // await SubscribeMessage(channel, EXCHANGE_NAME, CUSTOMER_SERVICE, usecase);
-
-    const { app } = await ExpressApp()
-
+    await SubscribeMessage(channel, EXCHANGE_NAME, CUSTOMER_SERVICE, usecase);
 
     app.listen(PORT, () => {
           console.log(`listening to port ${PORT}`);

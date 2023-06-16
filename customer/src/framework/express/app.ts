@@ -8,15 +8,17 @@ import { CustomerUseCase } from '../../usecase/customer/customer.usecase';
 import { configureIOCContainer } from '../../config/container.config';
 
 
-const container = configureIOCContainer()
-
-const usecase = container.get<CustomerUseCase>(CustomerUseCase)
 
 export const ExpressApp = async () => {
     
     const app = express()
 
     app.use(express.json());
+
+    const container = configureIOCContainer()
+
+    const usecase = container.get<CustomerUseCase>(CustomerUseCase)
+    
     
     app.use(cors());
 
@@ -28,5 +30,3 @@ export const ExpressApp = async () => {
     
 }
 
-
-export default usecase
