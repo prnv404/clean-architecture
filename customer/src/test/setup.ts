@@ -34,9 +34,9 @@ afterAll(async () => {
       }
   
   if (mongo) {
-     mongo.stop();
+    await mongo.stop();
   }
 
   await mongoose.connection.close();
-
+  
 });
