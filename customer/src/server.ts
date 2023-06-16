@@ -7,6 +7,7 @@ import { ConnectDb } from './framework/mongodb'
 import { CreateChannel, SubscribeMessage } from "@prnv404/ecom-common"
 import { ExpressApp } from './framework'; 
 import { CustomerUseCase } from './usecase/customer/customer.usecase';
+import usecase from './framework/express/app';
 
 
 const StartServer = async () => {
@@ -16,11 +17,11 @@ const StartServer = async () => {
     
     await ConnectDb(MONGO_URI);
 
-    const { app, usecase } = await ExpressApp()
-    
-    
-    
     await SubscribeMessage(channel, EXCHANGE_NAME, CUSTOMER_SERVICE, usecase);
+
+
+    const { app } = await ExpressApp()
+
     
 
     app.listen(PORT, () => {
