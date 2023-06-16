@@ -8,23 +8,23 @@ beforeAll(async () => {
   // process.env.MONGO_URI = 'mongodb://localhost:27017/customer'
 
 
-  // if (process.env.NODE_ENV ==='dev' ) {
+  if (process.env.NODE_ENV ==='dev' ) {
     await mongoose.connect('mongodb://localhost:27017/customer')
-  // } else {
-  //   const mongo = await MongoMemoryServer.create();
-  //   const mongoUri = mongo.getUri();
-  //   await mongoose.connect(mongoUri);
+  } else {
+    const mongo = await MongoMemoryServer.create();
+    const mongoUri = mongo.getUri();
+    await mongoose.connect(mongoUri);
     
     
-  // }
+  }
 });
 
-// beforeEach(async () => {
-//   const collections = await mongoose.connection.db.collections();
-//   for (let collection of collections) {
-//     await collection.deleteMany({});
-//   }
-// });
+beforeEach(async () => {
+  const collections = await mongoose.connection.db.collections();
+  for (let collection of collections) {
+    await collection.deleteMany({});
+  }
+});
 
 afterAll(async () => {
     const collections = await mongoose.connection.db.collections();
