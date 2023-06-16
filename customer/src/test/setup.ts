@@ -32,8 +32,11 @@ afterAll(async () => {
       for (let collection of collections) {
         await collection.deleteMany({});
       }
+  
   if (mongo) {
-    await mongo.stop();
+     mongo.stop();
   }
+
   await mongoose.connection.close();
+
 });
