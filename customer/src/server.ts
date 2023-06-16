@@ -19,7 +19,6 @@ const StartServer = async () => {
 
     // await SubscribeMessage(channel, EXCHANGE_NAME, CUSTOMER_SERVICE, usecase);
 
-
     const { app } = await ExpressApp()
 
 
