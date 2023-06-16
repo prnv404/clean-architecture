@@ -22,6 +22,7 @@ const StartServer = async () => {
     
     await SubscribeMessage(channel, EXCHANGE_NAME, CUSTOMER_SERVICE, usecase);
     
+    
 
     app.listen(PORT, () => {
           console.log(`listening to port ${PORT}`);
