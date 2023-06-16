@@ -13,16 +13,15 @@ import usecase from './framework/express/app';
 const StartServer = async () => {
     
 
-    const channel =await CreateChannel(MSG_QUEUE_URL,EXCHANGE_NAME)
+    // const channel = await CreateChannel(MSG_QUEUE_URL, EXCHANGE_NAME)
     
     await ConnectDb(MONGO_URI);
 
-    await SubscribeMessage(channel, EXCHANGE_NAME, CUSTOMER_SERVICE, usecase);
+    // await SubscribeMessage(channel, EXCHANGE_NAME, CUSTOMER_SERVICE, usecase);
 
 
     const { app } = await ExpressApp()
 
-    
 
     app.listen(PORT, () => {
           console.log(`listening to port ${PORT}`);
@@ -32,7 +31,7 @@ const StartServer = async () => {
         process.exit();
     })
     .on('close', () => {
-        channel.close();
+        // channel.close();
     })
     
 
