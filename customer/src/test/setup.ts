@@ -1,11 +1,21 @@
+import { Express } from "express";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
+import request from 'supertest'
+import { ExpressApp } from "../framework";
+
+declare global {
+  var signin:() => Promise<string>;
+}
 
 let mongo: any;
+let application :Express
 beforeAll(async () => {
   process.env.APP_SECRET = "asdfasdf";
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   // process.env.MONGO_URI = 'mongodb://localhost:27017/customer'
+  const { app } = await ExpressApp()
+  application = app
 
 
   if (process.env.NODE_ENV ==='dev' ) {
@@ -15,16 +25,33 @@ beforeAll(async () => {
     const mongoUri = mongo.getUri();
     await mongoose.connect(mongoUri);
     
-    
-    
   }
+
+  
+global.signin = async () => {
+
+
+  const response = await request(application)
+    .post("/login")
+    .send({
+      email: "email@gmail.com",
+      password: "password"
+    })
+    .expect(200);
+
+  return response.body.data.token
+  
+};
+
+
+
 });
 
 beforeEach(async () => {
-  const collections = await mongoose.connection.db.collections();
-  for (let collection of collections) {
-    await collection.deleteMany({});
-  }
+  // const collections = await mongoose.connection.db.collections();
+  // for (let collection of collections) {
+  //   await collection.deleteMany({});
+  // }
 });
 
 afterAll(async () => {
@@ -40,9 +67,6 @@ afterAll(async () => {
   await mongoose.connection.close();
   
 });
-
-
-
 
 
 

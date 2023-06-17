@@ -1,5 +1,4 @@
 import express, { Express, NextFunction, Request, Response } from 'express'
-import * as amqplib from 'amqplib'
 
 import { CustomerUseCase } from '../usecase/customer/customer.usecase';
 // import { SubscribeMessage } from '../../utils';
@@ -35,7 +34,6 @@ export const CustomerApi = (app:Express,usecase:CustomerUseCase) => {
         
         const { _id } = req.user!
 
-        console.log(req.body)
 
         const { street, postalCode, city,country } = req.body;
 
