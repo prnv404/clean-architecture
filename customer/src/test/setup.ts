@@ -16,6 +16,7 @@ beforeAll(async () => {
   // process.env.MONGO_URI = 'mongodb://localhost:27017/customer'
   const { app } = await ExpressApp()
   application = app
+  
 
 
   if (process.env.NODE_ENV ==='dev' ) {
@@ -27,37 +28,21 @@ beforeAll(async () => {
     
   }
 
-  
-global.signin = async () => {
-
-
-  const response = await request(application)
-    .post("/login")
-    .send({
-      email: "email@gmail.com",
-      password: "password"
-    })
-    .expect(200);
-
-  return response.body.data.token
-  
-};
-
-
 
 });
 
-beforeEach(async () => {
-  // const collections = await mongoose.connection.db.collections();
-  // for (let collection of collections) {
-  //   await collection.deleteMany({});
-  // }
-});
+// beforeEach(async () => {
+//   // const collections = await mongoose.connection.db.collections();
+//   // for (let collection of collections) {
+//   //   await collection.deleteMany({});
+//   // }
+// });
 
 afterAll(async () => {
     const collections = await mongoose.connection.db.collections();
       for (let collection of collections) {
         await collection.deleteMany({});
+        await collection.drop()
       }
   
   if (mongo) {
@@ -70,3 +55,15 @@ afterAll(async () => {
 
 
 
+
+global.signin = async () => {
+  const response = await request(application)
+    .post("/login")
+    .send({
+      email: "email@gmail.com",
+      password: "password"
+    })
+    .expect(200);
+
+  return response.body.data.token
+}

@@ -14,10 +14,12 @@ describe("CUSTOMER API TEST CASE ", () => {
         
         application = app
 
+       
+
     })
     
 
-    it('SIGNUP SHOULD RETURN 200 ', async () => {
+    test('SIGNUP SHOULD RETURN 200 ', async () => {
 
         const response = await request(application).post('/signup').send({
             email: "email@gmail.com",
@@ -29,7 +31,7 @@ describe("CUSTOMER API TEST CASE ", () => {
 
     })
 
-    it('SIGNIN SHOULD RETURN 200', async () => {
+    test('SIGNIN SHOULD RETURN 200', async () => {
         
         const response = await request(application).post('/login').send({
             email: "email@gmail.com",
@@ -40,10 +42,9 @@ describe("CUSTOMER API TEST CASE ", () => {
 
     })
 
-    it("ADDRESS SHOULD ADDED AND RETURN WITH 200", async () => {
+    test("ADDRESS SHOULD ADDED AND RETURN WITH 200", async () => {
         
         const token = await signin()
-
         const response = await request(application).post("/address").set('Authorization', `Bearer ${token}`).send({
             street: "Street",
             postalCode: "Postalcode",
@@ -55,17 +56,17 @@ describe("CUSTOMER API TEST CASE ", () => {
 
     })
 
-    it("SHOULD RETURN USER PROFILE WITH 200", async () => {
+    test("SHOULD RETURN USER PROFILE WITH 200", async () => {
 
         const token = await signin()
 
         const response = await request(application).get('/profile').set('Authorization', `Bearer ${token}`).send({})
 
         expect(response.statusCode).toEqual(200)
-
+        
     })
 
-    it("SHOULD RETURN SHOPPING DETAILS WITH 200", async () => {
+    test("SHOULD RETURN SHOPPING DETAILS WITH 200", async () => {
 
         const token = await signin()
 
@@ -76,7 +77,7 @@ describe("CUSTOMER API TEST CASE ", () => {
     })
 
 
-    it("SHOULD RETURN WISHLIST WITH 200", async () => {
+    test("SHOULD RETURN WISHLIST WITH 200", async () => {
 
         const token = await signin()
 

@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev src/server.ts",
-    "test": " NODE_ENV=dev jest --watchAll ",
-    "test:ci": "node_ENV=dev jest --detectOpenHandles"
+    "test": " NODE_ENV=dev jest --watchAll --no-cache ",
+    "test:ci": "NODE_ENV=dev jest --detectOpenHandles"
   },
   "jest": {
     "preset": "ts-jest",
