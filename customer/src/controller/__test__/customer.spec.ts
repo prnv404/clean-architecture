@@ -14,7 +14,6 @@ describe("CUSTOMER API TEST CASE ", () => {
         
         application = app
 
-       
 
     })
     
