@@ -1,7 +1,7 @@
 import { CustomerUseCase } from "../customer.usecase"
 import { CustomerRepositoryImpl } from "../../../framework"
 
-describe("CUSTOMER USECASE UNIT TESTING ", () => {
+describe("CUSTOMER USECASE UNIT TEST ", () => {
 
     let customerUsecase:CustomerUseCase
     let id: string
