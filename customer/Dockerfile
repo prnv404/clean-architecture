@@ -4,11 +4,9 @@ WORKDIR /customer
 
 COPY package.json .
 
-
 RUN npm install
 
 COPY . .
-
 
 EXPOSE 8001
 
